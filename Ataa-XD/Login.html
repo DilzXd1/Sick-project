@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Trash4Flood - Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="icon" href="https://files.catbox.moe/0dhyw3.jpg" type="image/jpg">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary-color: #FFF000; /* Ungu asli */
+      --background-color: black; /* Hitam gelap asli */
+      --surface-color: black; /* Ungu gelap asli */
+      --text-color: white; /* Putih keunguan asli */
+      --shadow-color: rgba(158, 78, 255, 0.5); /* Glow ungu asli */
+      --accent-color: #FFF000; /* Aksen ungu terang */
+    }
+
+    body {
+      background-color: var(--background-color);
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 20px;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 2;
+      background: var(--surface-color);
+      border: 2px solid var(--primary-color);
+      backdrop-filter: blur(10px);
+      padding: 50px 40px;
+      border-radius: 40px;
+      max-width: 550px;
+      width: 100%;
+      box-shadow: 0 0 100px var(--shadow-color);
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .logo {
+      position: relative;
+      width: 410px; /* Diperbesar */
+      height: 300px; /* Diperbesar, proporsional */
+      border: 1px solid var(--primary-color);
+      border-radius: 30px;
+      overflow: hidden;
+      margin: 0 auto 35px;
+      box-shadow: 0 0 20px var(--shadow-color);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-slideshow {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .logo-slide {
+      min-width: 100%;
+      height: 100%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .logo-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Agar gambar rapi */
+      border-radius: 100px;
+    }
+
+    .logo-text {
+      position: absolute;
+      bottom: 10px; /* Di bawah */
+      left: 10px; /* Bagian kiri */
+      font-size: 14px; /* Ukuran rapi */
+      font-weight: 700; /* Tebal */
+      letter-spacing: 0.5px; /* Jarak antar huruf keren */
+      color: white;
+      text-shadow: 0 0 5px var(--shadow-color);
+      background: rgba(0, 0, 0, 0.7); /* Background semi-transparan */
+      padding: 5px 8px;
+      border-radius: 5px;
+      z-index: 1;
+    }
+
+    /* Tombol navigasi slideshow */
+    .slideshow-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(158, 78, 255, 0.8);
+      color: var(--text-color);
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+      z-index: 2;
+    }
+
+    .slideshow-nav:hover {
+      background: var(--primary-color);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .title {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-color);
+      letter-spacing: 2px; /* Jarak antar huruf keren */
+      text-shadow: 0 0 10px var(--shadow-color);
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: var(--text-color);
+      letter-spacing: 1px;
+      margin-top: 5px;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 25px;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-color);
+      font-size: 16px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 16px 16px 16px 50px;
+      border-radius: 12px;
+      border: 1px solid var(--primary-color);
+      background: var(--surface-color);
+      color: var(--text-color);
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600; /* Tebal */
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      box-shadow: 0 0 15px var(--shadow-color);
+    }
+
+    .form-control::placeholder {
+      color: white;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+      color: black;
+      font-weight: 700; /* Tebal */
+      letter-spacing: 1px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 15px;
+      box-shadow: 0 0 20px var(--shadow-color);
+    }
+
+    .btn-login:hover {
+      transform: scale(1.02);
+    }
+    
+    .footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: white;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    /* Notification Styles */
+    #notification {
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 90%;
+        background: var(--surface-color);
+        color: var(--text-color);
+        padding: 14px 24px;
+        border: 1px solid var(--primary-color);
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+        font-weight: 600;
+        box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        z-index: 9999;
+        animation: slideIn 0.5s ease-out;
+    }
+    #notification.error {
+        border-color: #ff4444;
+    }
+    
+    @keyframes slideIn {
+        from { top: -100px; opacity: 0; }
+        to { top: 20px; opacity: 1; }
+    }
+
+    /* Media Queries */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 40px 25px;
+        max-width: 90%;
+      }
+      .title {
+        font-size: 28px;
+      }
+      .logo {
+        width: 200px; /* Sesuaikan untuk mobile */
+        height: 200px;
+      }
+      .logo-text {
+        font-size: 12px;
+        padding: 4px 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="login-container">
+    <div class="logo-container">
+      <div class="logo">
+        <div class="logo-slideshow" id="logoSlideshow">
+          <!-- Ganti gambar ini dengan URL gambar Anda. Tambahkan lebih banyak .logo-slide untuk slideshow -->
+          <div class="logo-slide">
+            <img src="https://files.catbox.moe/3jman3.jpg" alt="Logo Slide 1">
+            <div class="logo-text">Developer : @RapzXyzz</div>
+          </div>
+          <div class="logo-slide">
+            <img src="https://files.catbox.moe/lphpvi.jpg" alt="Logo Slide 2">
+            <div class="logo-text">Developer : @RapzXyzz</div>
+          </div>
+          <div class="logo-slide">
+            <img src="https://files.catbox.moe/ziqf4q.jpg" alt="Logo Slide 3">
+            <div class="logo-text">Developer : @RapzXyzz</div>
+          </div>
+        </div>
+        <button class="slideshow-nav prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="slideshow-nav next" onclick="changeSlide(1)">&#10095;</button>
+      </div>
+      <div class="title">Trash4Flood</div>
+      <div class="subtitle">Gateway to System Control</div>
+    </div>
+
+    <form method="POST" action="/auth" id="loginForm">
+      <div class="form-group">
+        <i class="fas fa-user-shield"></i>
+        <input type="text" name="username" class="form-control" placeholder="Username" required />
+      </div>
+      <div class="form-group">
+        <i class="fas fa-key"></i>
+        <input type="password" name="password" class="form-control" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn-login">
+        MASUK
+      </button>
+    </form>
+
+    <div class="footer">© 2025 Trash4Flood PANEL.</div>
+  </div>
+
+  <div id="notification"></div>
+  
+  <script>
+    // Slideshow functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.logo-slide');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      if (index >= totalSlides) currentSlide = 0;
+      if (index < 0) currentSlide = totalSlides - 1;
+      document.getElementById('logoSlideshow').style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function changeSlide(direction) {
+      currentSlide += direction;
+      showSlide(currentSlide);
+    }
+
+    // Auto-slide every 5 seconds (opsional, hapus jika tidak ingin)
+    setInterval(() => {
+      changeSlide(1);
+    }, 5000);
+
+    // Notification for login messages
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    
+    if (msg) {
+      showNotification(decodeURIComponent(msg));
+    }
+    
+    function showNotification(message) {
+      const notification = document.getElementById("notification");
+      notification.innerHTML = `<i class="fas fa-exclamation-circle"></i> &nbsp; ${message}`;
+      notification.style.display = 'block';
+      notification.classList.add("error");
+      
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 5000);
+    }
+    
+    // Prevent form resubmission on page refresh
+    if (window.history.replaceState) {
+      window.history.replaceState(null, null, window.location.href.split('?')[0]);
+    }
+    
+    // Prevent Zoom
+    document.addEventListener('gesturestart', e => e.preventDefault());
+    document.addEventListener('wheel', e => { if(e.ctrlKey) e.preventDefault() }, { passive: false });
+  </script>
+</body>
+    </html>
